@@ -7,8 +7,13 @@ namespace ConsoleApplication1
     {
         public static void Main(string[] args)
         {
-            using (var host = new NancyHost(new Uri("http://localhost:12554/")))
+            var hostConfigs = new HostConfiguration
             {
+                UrlReservations = new UrlReservations() {CreateAutomatically = true}
+            };
+            using (var host = new NancyHost(hostConfigs, new Uri("http://localhost:12554/")))
+            {
+                host.Start();
                 Console.ReadKey();
             }
         }
